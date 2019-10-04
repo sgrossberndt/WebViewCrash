@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
 import com.example.crashtest.webviewcrash.R;
 
@@ -24,7 +25,13 @@ public class MainFragment extends Fragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 													 @Nullable Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.main_fragment, container, false);
+		final View view = inflater.inflate(R.layout.main_fragment, container, false);
+
+		final WebView webView = view.findViewById(R.id.web_view);
+		final String html = "<html><body><select><option>1</option><option>2</option></select></body></html>";
+		webView.loadDataWithBaseURL(null, html, "text/html", "utf-8", null);
+
+		return view;
 	}
 
 	@Override
